@@ -13,7 +13,7 @@ You can follow the steps on the next Blog Post in Spanish - https://www.jorgedel
 But in case you can't read Spanish:
 * Download the veeam-stats.ps1 file and change the BRHost with your own fqdn or IP
 * Run the veeam-stats.ps1 to check that you can retrieve the information properly
-* Add the next to your telegraf.conf and restart the telegraf service. Mind the Script path
+* Add the next to your telegraf.conf and restart the telegraf service. Mind the Script path, also if your environment is quite large, you need to tune the interval and timeout and set them higher times 600s for example
 ```
  [[inputs.exec]]
   commands = ["powershell C:/veeam-stats.ps1"]
