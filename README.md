@@ -28,7 +28,7 @@ But in case you can't read Spanish:
 ----------
 
 ### Additional Information
-You can find the original code for PRTG here, thank you so much Markus Kraus: https://github.com/mycloudrevolution/Advanced-PRTG-Sensors/blob/master/Veeam/PRTG-VeeamBRStats.ps1
-Big thanks to Shawn, creating a awsome Reporting Script: http://blog.smasterson.com/2016/02/16/veeam-v9-my-veeam-report-v9-0-1/
+* You can find the original code for PRTG here, thank you so much Markus Kraus: https://github.com/mycloudrevolution/Advanced-PRTG-Sensors/blob/master/Veeam/PRTG-VeeamBRStats.ps1
+* Big thanks to Shawn, creating a awsome Reporting Script: http://blog.smasterson.com/2016/02/16/veeam-v9-my-veeam-report-v9-0-1/
 
 I hope it helps you
