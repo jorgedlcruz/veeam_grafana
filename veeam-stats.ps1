@@ -228,7 +228,7 @@ $Name = "REPO - " + $Repo."Repository Name"
 $Free = $Repo."Free (%)"
 Write-Host "`"$Name`"": "$Free,"
 	}
-Write-Host "`"Number of protected Endpoints`"": "$number_endpoints,"
+Write-Host "`"Protected-Endpoints`"": "$number_endpoints,"
 Write-Host "`"TotalBackupRead`"": "$totalReadBk,"
 $Count = $runningSessionsRepl.Count
 Write-Host "`"Running-Replications`"": "$Count"
