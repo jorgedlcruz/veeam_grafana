@@ -8,13 +8,14 @@
         .Notes
         NAME:  veeam-stats.ps1
         ORIGINAL NAME: PRTG-VeeamBRStats.ps1
-        LASTEDIT: 27/02/2017
-        VERSION: 0.1
+        LASTEDIT: 22/01/2018
+        VERSION: 0.3
         KEYWORDS: Veeam, PRTG
    
         .Link
         http://mycloudrevolution.com/
         Minor Edits and JSON output for Grafana by https://jorgedelacruz.es/
+        Minor Edits from JSON to Influx for Grafana by r4yfx
  
  #Requires PS -Version 3.0
  #Requires -Modules VeeamPSSnapIn    
@@ -250,7 +251,8 @@ $Count = $failedSessionsRepl.Count
 $body="veeam-stats failedreplications=$Count"
 Write-Host $body
 
-Write-Host "`"TotalBackupTransfer`"": "$totalxferBk,"
+$body="veeam-stats totalbackuptransfer=$totalxferBk"
+
 foreach ($Repo in $RepoReport){
 $Name = "REPO - " + $Repo."Repository Name"
 $Free = $Repo."Free (%)"
