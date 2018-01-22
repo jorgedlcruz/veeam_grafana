@@ -22,7 +22,7 @@
 [cmdletbinding()]
 param(
     [Parameter(Position=0, Mandatory=$false)]
-        [string] $BRHost = "veeamsrv",
+        [string] $BRHost = "veeam",
     [Parameter(Position=1, Mandatory=$false)]
         $reportMode = "24", # Weekly, Monthly as String or Hour as Integer
     [Parameter(Position=2, Mandatory=$false)]
@@ -188,51 +188,85 @@ $number_endpoints++;
 #endregion
  
 
-#region: JSON Output for Telegraf
-Write-Host "{" 
-$Count = $successSessionsBk.Count
-Write-Host "`"Successful-Backups`"": "$Count,"
-$Count = $warningSessionsBk.Count
-Write-Host "`"Warning-Backups`"": "$Count,"
-$Count = $failsSessionsBk.Count
-Write-Host "`"Failes-Backups`"": "$Count,"
-$Count = $failedSessionsBk.Count
-Write-Host "`"Failed-Backups`"": "$Count,"
-$Count = $runningSessionsBk.Count
-Write-Host "`"Running-Backups`"": "$Count,"
-$Count = $successSessionsBkC.Count
-Write-Host "`"Successful-BackupCopys`"": "$Count,"
-$Count = $warningSessionsBkC.Count
-Write-Host "`"Warning-BackupCopys`"": "$Count,"
-$Count = $failsSessionsBkC.Count
-Write-Host "`"Failes-BackupCopys`"": "$Count,"
-$Count = $failedSessionsBkC.Count
-Write-Host "`"Failed-BackupCopys`"": "$Count,"
-$Count = $runningSessionsBkC.Count
-Write-Host "`"Running-BackupCopys`"": "$Count,"
-$Count = $IdleSessionsBkC.Count
-Write-Host "`"Idle-BackupCopys`"": "$Count,"
-$Count = $successSessionsRepl.Count
-Write-Host "`"Successful-Replications`"": "$Count,"
-$Count = $warningSessionsRepl.Count
-Write-Host "`"Warning-Replications`"": "$Count,"
-$Count = $failsSessionsRepl.Count
-Write-Host "`"Failes-Replications`"": "$Count,"
-$Count = $failedSessionsRepl.Count
-Write-Host "`"Failed-Replications`"": "$Count,"
+#region: Influxdb Output for Telegraf
 
+$Count = $successSessionsBk.Count
+$body="veeam-stats successfulbackups=$Count"
+Write-Host $body
+
+$Count = $warningSessionsBk.Count
+$body="veeam-stats warningbackups=$Count"
+Write-Host $body
+
+$Count = $failsSessionsBk.Count
+$body="veeam-stats failesbackups=$Count"
+Write-Host $body
+
+$Count = $failedSessionsBk.Count
+$body="veeam-stats failedbackups=$Count"
+Write-Host $body
+
+$Count = $runningSessionsBk.Count
+$body="veeam-stats runningbackups=$Count"
+Write-Host $body
+
+$Count = $successSessionsBkC.Count
+$body="veeam-stats successfulbackupcopys=$Count"
+Write-Host $body
+
+$Count = $warningSessionsBkC.Count
+$body="veeam-stats warningbackupcopys=$Count"
+Write-Host $body
+
+$Count = $failsSessionsBkC.Count
+$body="veeam-stats failesbackupcopys=$Count"
+Write-Host $body
+
+$Count = $failedSessionsBkC.Count
+$body="veeam-stats failedbackupcopys=$Count"
+Write-Host $body
+
+$Count = $runningSessionsBkC.Count
+$body="veeam-stats runningbackupcopys=$Count"
+Write-Host $body
+
+$Count = $IdleSessionsBkC.Count
+$body="veeam-stats idlebackupcopys=$Count"
+Write-Host $body
+
+$Count = $successSessionsRepl.Count
+$body="veeam-stats successfulreplications=$Count"
+Write-Host $body
+
+$Count = $warningSessionsRepl.Count
+$body="veeam-stats warningreplications=$Count"
+Write-Host $body
+
+$Count = $failsSessionsRepl.Count
+$body="veeam-stats failesreplications=$Count"
+Write-Host $body
+
+$Count = $failedSessionsRepl.Count
+$body="veeam-stats failedreplications=$Count"
+Write-Host $body
 
 Write-Host "`"TotalBackupTransfer`"": "$totalxferBk,"
 foreach ($Repo in $RepoReport){
 $Name = "REPO - " + $Repo."Repository Name"
 $Free = $Repo."Free (%)"
-Write-Host "`"$Name`"": "$Free,"
+$body="veeam-stats $Name=$Free"
+Write-Host $body
 	}
-Write-Host "`"Protected-Endpoints`"": "$number_endpoints,"
-Write-Host "`"TotalBackupRead`"": "$totalReadBk,"
+$body="veeam-stats protectedendpoints=$number_endpoints"
+Write-Host $body
+
+$body="veeam-stats totalbackupread=$totalReadBk"
+Write-Host $body
+
 $Count = $runningSessionsRepl.Count
-Write-Host "`"Running-Replications`"": "$Count"
-Write-Host "}" 
+$body="veeam-stats runningreplications=$Count"
+Write-Host $body
+
 #endregion
 
 #region: Debug
