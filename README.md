@@ -20,7 +20,7 @@ But in case you can't read Spanish:
   name_override = "veeamstats"
   interval = "60s"
   timeout = "60s"
-  data_format = "json"
+  data_format = "influx"
 ```
 * Download the grafana_veeam_dashboard JSON file and import it into your Grafana
 * Change your hosts inside the Grafana and enjoy :)
