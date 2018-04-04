@@ -254,7 +254,7 @@ Write-Host $body
 $body="veeam-stats totalbackuptransfer=$totalxferBk"
 
 foreach ($Repo in $RepoReport){
-$Name = "REPO - " + $Repo."Repository Name"
+$Name = "REPO " + $Repo."Repository Name" -replace '\s','_'
 $Free = $Repo."Free (%)"
 $body="veeam-stats $Name=$Free"
 Write-Host $body
